@@ -1,5 +1,5 @@
 <?php
-require __DIR__ .'\util\Db.php';
+use App\Util\Db;
 $container = $app->getContainer();
 
 // monolog

@@ -1,13 +1,17 @@
 <?php
-	//use App\Model\User;
+	
+	namespace App\Util;
+
+	use PDO;
 	class Db {
 		private $pdo = null;
 		/*
 		***
 		*/
-		function __construct($config) {
+		function __construct() {
 			if($this->pdo==null) {
-				//@dsn host+dbname
+				//@dsn host+port+dbname
+				$config = parse_ini_file(__DIR__ . '\..\..\config\dbconfig.ini');
 				$dsn = "mysql:host=".$config['host'].";dbname=".$config['dbname'];
 				$this->pdo = new PDO( $dsn, $config['username'], $config['password']);
 				$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

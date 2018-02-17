@@ -4,8 +4,8 @@
 	class UserDomain {
 		public $service;
 
-		function __construct($db) {
-			$this->service = new UserService($db);
+		function __construct() {
+			$this->service = new UserService();
 		}
 
 		function getAllUsers() {
