@@ -1,18 +1,25 @@
 <?php
-	require __DIR__.'\..\util\Db.php';
-	require __DIR__.'\..\model\User.php';
-	$config = parse_ini_file(__DIR__ .'\..\..\config\dbconfig.ini');
-	$db = new Db();
-	$db->connect($config);
+	namespace App\Services;
+	use App\Model\User;
 	class UserService {
+		private $db;
+		function __construct($db) {
+			$this->db = $db;
+		}
+
 		function getAllUsers() {
-			global $db;
-			return $db->select("select * from user",array(),"User");
+			return $this->db->select("select * from user",array(),"User");
 		}
 
 		function getUser($args) {
-			global $db;
-			return $db->select("select * from user where user_id = :userId",$args,"User");
+			return $this->db->select("select * from user where user_id = :userId",$args,User::class);
 		}	
+
+		function addUser($args) {
+			global $db;
+			$args['password'] = md5($args['password']);
+			$query = "insert into user (user_name,user_type,password) values (:userName,:userType,:password)";
+			return $this->db->insert($query, $args);
+		}
 	}
 ?>

@@ -1,6 +1,6 @@
 <?php
+require __DIR__ .'\util\Db.php';
 $container = $app->getContainer();
-
 
 // monolog
 $container['logger'] = function ($c) {
@@ -12,5 +12,9 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+$container['db'] = function ($c) {
+	$config = parse_ini_file(__DIR__.'\..\config\dbconfig.ini');
+	return new Db($config);
+}
 
 ?>

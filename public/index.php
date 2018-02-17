@@ -8,7 +8,7 @@ require '../vendor/autoload.php';
 
 session_start();
 
-$config = require __DIR__ . '/../src/config.php';
+
 // Instantiate the app
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);

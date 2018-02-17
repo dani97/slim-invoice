@@ -1,9 +1,11 @@
 <?php
-	
+	//use App\Model\User;
 	class Db {
 		private $pdo = null;
-
-		function connect($config) {
+		/*
+		***
+		*/
+		function __construct($config) {
 			if($this->pdo==null) {
 				//@dsn host+dbname
 				$dsn = "mysql:host=".$config['host'].";dbname=".$config['dbname'];
@@ -14,6 +16,10 @@
 
 		function  close() {
 			$this->pdo = null;
+		}
+
+		function getConnection() {
+			return $this->pdo;
 		}
 
 		function fetch($query ,$bindParams) {
@@ -64,6 +70,7 @@
 				}
 			} 
 			catch(PDOException $e){
+				return $e->getMessage();
 			}
 		}
 
